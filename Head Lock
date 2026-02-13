@@ -1,0 +1,64 @@
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local player = Players.LocalPlayer
+
+local normalSpeed = 16
+local currentSpeed = 40
+local speedEnabled = false
+local headLockEnabled = false
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.ResetOnSpawn = false
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 240, 0, 210)
+frame.Position = UDim2.new(0.5, -120, 0.5, -105)
+frame.BackgroundColor3 = Color3.fromRGB(25,25,25)
+frame.Active = true
+frame.Draggable = true
+frame.Parent = screenGui
+
+local speedButton = Instance.new("TextButton")
+speedButton.Size = UDim2.new(0, 200, 0, 40)
+speedButton.Position = UDim2.new(0.5, -100, 0, 15)
+speedButton.Text = "Speed: OFF"
+speedButton.BackgroundColor3 = Color3.fromRGB(170,0,0)
+speedButton.TextColor3 = Color3.new(1,1,1)
+speedButton.Parent = frame
+
+local headButton = Instance.new("TextButton")
+headButton.Size = UDim2.new(0, 200, 0, 40)
+headButton.Position = UDim2.new(0.5, -100, 0, 65)
+headButton.Text = "Head Lock: OFF"
+headButton.BackgroundColor3 = Color3.fromRGB(170,0,0)
+headButton.TextColor3 = Color3.new(1,1,1)
+headButton.Parent = frame
+
+local plusButton = Instance.new("TextButton")
+plusButton.Size = UDim2.new(0, 80, 0, 40)
+plusButton.Position = UDim2.new(0, 30, 0, 130)
+plusButton.Text = "+"
+plusButton.TextScaled = true
+plusButton.BackgroundColor3 = Color3.fromRGB(0,120,255)
+plusButton.TextColor3 = Color3.new(1,1,1)
+plusButton.Parent = frame
+
+local minusButton = Instance.new("TextButton")
+minusButton.Size = UDim2.new(0, 80, 0, 40)
+minusButton.Position = UDim2.new(0, 130, 0, 130)
+minusButton.Text = "-"
+minusButton.TextScaled = true
+minusButton.BackgroundColor3 = Color3.fromRGB(0,120,255)
+minusButton.TextColor3 = Color3.new(1,1,1)
+minusButton.Parent = frame
+
+local function applySpeed()
+    local character = player.Character
+    if character and character:FindFirstChild("Humanoid") then
+        character.Humanoid.WalkSpeed = speedEnabled and currentSpeed or normalSpeed
+    end
+end
+
+local function applyHead
